@@ -4,6 +4,6 @@ variable "tag_prefix" {}
 
 # -- network
 variable "vpc_cidr" {}
-variable "public_cidrs" {
-    type = "list"
-}
+variable "public_cidr" {}
+variable "private_cidr" {}
+variable "domainname" {}
