@@ -1,0 +1,9 @@
+# --- compute/variables.tf
+variable "tag_prefix" {}
+variable "key_name" {}
+variable "public_key_path" {}
+variable "tower_server_count" {}
+variable "instance_type" {}
+variable "tower_sg" {}
+variable "public_subnet" {}
+variable "tower_root_partition_size" {}
