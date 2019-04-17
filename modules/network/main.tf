@@ -6,7 +6,8 @@ resource "aws_vpc_dhcp_options" "dhcpopts" {
     domain_name = "${var.domainname}"
     domain_name_servers = ["AmazonProvidedDNS"]
     tags = {
-        Name = "${var.tag_prefix}-dhcp-options"
+        Name = "${var.name_tag_prefix}-dhcp-options",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 
@@ -17,7 +18,8 @@ resource "aws_vpc" "vpc1" {
     enable_dns_hostnames = true
     assign_generated_ipv6_cidr_block = true
     tags = {
-        Name = "${var.tag_prefix}-vpc"
+        Name = "${var.name_tag_prefix}-vpc",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 
@@ -31,7 +33,8 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 resource "aws_internet_gateway" "igw" {
     vpc_id = "${aws_vpc.vpc1.id}"
     tags = {
-        Name = "${var.tag_prefix}-igw"
+        Name = "${var.name_tag_prefix}-igw",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 
@@ -51,7 +54,8 @@ resource "aws_route_table" "public_rt" {
     }
 
     tags = {
-        Name = "${var.tag_prefix}-public-rt"
+        Name = "${var.name_tag_prefix}-public-rt",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 
@@ -63,7 +67,8 @@ resource "aws_subnet" "public_subnet" {
     availability_zone = "${data.aws_availability_zones.available.names[0]}"
 
     tags = {
-        Name = "${var.tag_prefix}-public-subnet"
+        Name = "${var.name_tag_prefix}-public-subnet",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 
@@ -77,7 +82,8 @@ resource "aws_route_table_association" "public_rt_assoc" {
 resource "aws_default_route_table" "vpc_default_rt" {
     default_route_table_id = "${aws_vpc.vpc1.default_route_table_id}"
     tags = {
-        Name = "${var.tag_prefix}-default-rt"
+        Name = "${var.name_tag_prefix}-default-rt",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 # private subnet
@@ -87,14 +93,16 @@ resource "aws_subnet" "private_subnet" {
     availability_zone = "${data.aws_availability_zones.available.names[0]}"
 
     tags = {
-        Name = "${var.tag_prefix}-private-subnet"
+        Name = "${var.name_tag_prefix}-private-subnet",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 /*
 # elastic IP
 resource "aws_eip" "natgw_eip" {
     tags = {
-        Name = "${var.tag_prefix}-nat-gateway-eip"
+        Name = "${var.name_tag_prefix}-nat-gateway-eip",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 # nat gateway
@@ -120,13 +128,14 @@ resource "aws_route_table" "private_rt" {
     }
 
     tags = {
-        Name = "${var.tag_prefix}-public-rt"
+        Name = "${var.name_tag_prefix}-public-rt",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }
 */
 
 resource "aws_security_group" "tower" {
-    name = "${var.tag_prefix}-tower_sg"
+    name = "${var.name_tag_prefix}-tower_sg"
     description = "Allows Tower Communications"
     vpc_id = "${aws_vpc.vpc1.id}"
     ingress {
@@ -156,6 +165,7 @@ resource "aws_security_group" "tower" {
         ipv6_cidr_blocks = ["::/0"]
     }
     tags = {
-        Name = "${var.tag_prefix}-tower_sg"
+        Name = "${var.name_tag_prefix}-tower_sg",
+        Owner = "${var.aws_resource_owner_name}"
     }
 }

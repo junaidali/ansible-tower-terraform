@@ -1,6 +1,7 @@
 # -- root/variables.tf
 variable "aws_region" {}
-variable "tag_prefix" {}
+variable "name_tag_prefix" {}
+variable "aws_resource_owner_name" {}
 
 # -- network
 variable "vpc_cidr" {}
