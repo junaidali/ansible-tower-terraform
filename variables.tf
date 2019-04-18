@@ -14,5 +14,8 @@ variable "accessip" {}
 variable key_name {}
 variable "public_key_path" {}
 variable "tower_server_count" {}
-variable "instance_type" {}
+variable "tower_instance_type" {}
 variable "tower_root_partition_size" {}
+variable "public_nodes_count" {}
+variable "private_nodes_count" {}
+variable "node_instance_type" {}

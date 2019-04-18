@@ -4,7 +4,12 @@ variable "aws_resource_owner_name" {}
 variable "key_name" {}
 variable "public_key_path" {}
 variable "tower_server_count" {}
-variable "instance_type" {}
+variable "tower_instance_type" {}
+variable "node_instance_type" {}
 variable "tower_sg" {}
+variable "inventory_node_sg" {}
 variable "public_subnet" {}
+variable "private_subnet" {}
 variable "tower_root_partition_size" {}
+variable "public_nodes_count" {}
+variable "private_nodes_count" {}
