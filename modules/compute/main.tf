@@ -27,6 +27,21 @@ data "aws_ami" "inventory_node" {
     }
 }
 
+resource "random_string" "admin_password" {
+    length = 16
+    special = false
+}
+
+resource "random_string" "database_password" {
+    length = 16
+    special = false
+}
+
+resource "random_string" "rabbitmq_password" {
+    length = 16
+    special = false
+}
+
 resource "aws_key_pair" "ssh_auth" {
     key_name = "${var.key_name}"
     public_key = "${file(var.public_key_path)}"
@@ -45,6 +60,41 @@ resource "aws_instance" "tower_server" {
     tags = {
         Name = "${var.name_tag_prefix}-tower-${count.index + 1}",
         Owner = "${var.aws_resource_owner_name}"
+    }
+}
+
+resource "null_resource" "tower_server" {
+    triggers {
+        public_ip = "${aws_instance.tower_server.public_ip}"
+    }
+
+    connection {
+        type = "ssh"
+        host = "${aws_instance.tower_server.public_ip}"
+        user = "ubuntu"
+        agent = true
+    }
+
+    provisioner "local-exec" {
+        command = "echo ANSIBLE_TOWER_VERSION='${var.tower_version}' > secrets.txt; echo ADMIN_PASSWORD='${random_string.admin_password.result}' >> secrets.txt; echo DB_PASSWORD='${random_string.database_password.result}' >> secrets.txt; echo RABBITMQ_PASSWORD='${random_string.rabbitmq_password.result}' >> secrets.txt"
+        working_dir = "./modules/compute/files/"
+    }
+    provisioner "file" {
+        source = "modules/compute/files/ansible-tower.sh"
+        destination = "/tmp/ansible-tower.sh"
+    }
+
+    provisioner "file" {
+        source = "modules/compute/files/secrets.txt"
+        destination = "/tmp/secrets.txt"
+    }
+    
+    provisioner "remote-exec" {
+        inline = [
+            "chmod +x /tmp/ansible-tower.sh",
+            "cd /tmp/",
+            "sudo /tmp/ansible-tower.sh > /tmp/ansible-tower.log"
+        ]
     }
 }
 

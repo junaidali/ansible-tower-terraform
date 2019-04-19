@@ -7,6 +7,7 @@ domainname = "syedjunaidali.local"
 accessip = "4.30.167.250/32"
 key_name = "syedjunaid.ali"
 public_key_path = "~/.ssh/id_rsa.pub"
+tower_version = "3.4.3-1"
 tower_server_count = 1
 tower_instance_type = "t2.medium"
 tower_root_partition_size = 20

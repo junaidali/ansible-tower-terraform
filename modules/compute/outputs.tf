@@ -11,3 +11,6 @@ output "private_inventory_ips" {
   value = "${aws_instance.inventory_nodes_private.*.private_ip}"
 }
 
+output "tower_admin_password" {
+  value = "${random_string.admin_password.result}"
+}

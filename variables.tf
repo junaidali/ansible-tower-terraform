@@ -13,6 +13,7 @@ variable "accessip" {}
 # -- compute
 variable key_name {}
 variable "public_key_path" {}
+variable "tower_version" {}
 variable "tower_server_count" {}
 variable "tower_instance_type" {}
 variable "tower_root_partition_size" {}

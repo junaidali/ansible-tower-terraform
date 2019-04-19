@@ -21,6 +21,7 @@ module "compute" {
     aws_resource_owner_name = "${var.aws_resource_owner_name}"
     key_name = "${var.key_name}"
     public_key_path = "${var.public_key_path}"
+    tower_version = "${var.tower_version}"
     tower_server_count = "${var.tower_server_count}"
     tower_instance_type = "${var.tower_instance_type}"
     node_instance_type = "${var.node_instance_type}"

@@ -3,6 +3,7 @@ variable "name_tag_prefix" {}
 variable "aws_resource_owner_name" {}
 variable "key_name" {}
 variable "public_key_path" {}
+variable "tower_version" {}
 variable "tower_server_count" {}
 variable "tower_instance_type" {}
 variable "node_instance_type" {}
