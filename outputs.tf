@@ -13,3 +13,7 @@ output "Private Inventory IP(s)" {
 output "Public Inventory IP(s)" {
     value = "${join(", ", module.compute.public_inventory_ips)}"
 }
+
+output "Public Windows Inventory IP(s)" {
+    value = "${join(", ", module.compute.win_public_inventory_ips)}"
+}

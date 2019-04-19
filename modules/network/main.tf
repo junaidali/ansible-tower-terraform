@@ -200,3 +200,34 @@ resource "aws_security_group" "inventory_node_sg" {
         Owner = "${var.aws_resource_owner_name}"
     }
 }
+
+resource "aws_security_group" "inventory_win_node_sg" {
+    name = "${var.name_tag_prefix}-inventory_win_node_sg"
+    description = "Allows RDP Communications"
+    vpc_id = "${aws_vpc.vpc1.id}"
+
+    ingress {
+        from_port = 3389
+        to_port = 3389
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        ipv6_cidr_blocks = ["::/0"]
+    }
+    tags = {
+        Name = "${var.name_tag_prefix}-inventory_win_node_sg",
+        Owner = "${var.aws_resource_owner_name}"
+    }
+}

@@ -14,3 +14,6 @@ variable "private_subnet" {}
 variable "tower_root_partition_size" {}
 variable "public_nodes_count" {}
 variable "private_nodes_count" {}
+variable "public_win_nodes_count" {}
+variable "inventory_win_node_sg" {}
+variable "win_node_instance_type" {}

@@ -20,3 +20,5 @@ variable "tower_root_partition_size" {}
 variable "public_nodes_count" {}
 variable "private_nodes_count" {}
 variable "node_instance_type" {}
+variable "public_win_nodes_count" {}
+variable "win_node_instance_type" {}

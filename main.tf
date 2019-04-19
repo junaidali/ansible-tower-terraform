@@ -32,4 +32,7 @@ module "compute" {
     tower_root_partition_size = "${var.tower_root_partition_size}"
     public_nodes_count = "${var.public_nodes_count}"
     private_nodes_count = "${var.private_nodes_count}"
+    public_win_nodes_count = "${var.public_win_nodes_count}"
+    inventory_win_node_sg = "${module.network.inventory_win_node_sg}"
+    win_node_instance_type = "${var.win_node_instance_type}"
 }

@@ -14,4 +14,6 @@ tower_root_partition_size = 20
 aws_resource_owner_name = "syedjunaid.ali@slalom.com"
 public_nodes_count = 0
 private_nodes_count = 0
+public_win_nodes_count = 1
 node_instance_type = "t2.nano"
+win_node_instance_type = "t2.micro"

@@ -13,3 +13,7 @@ output "tower_sg" {
 output "inventory_node_sg" {
   value = "${aws_security_group.inventory_node_sg.id}"
 }
+
+output "inventory_win_node_sg" {
+    value = "${aws_security_group.inventory_win_node_sg.id}"
+}
