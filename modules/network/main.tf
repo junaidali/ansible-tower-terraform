@@ -213,6 +213,20 @@ resource "aws_security_group" "inventory_win_node_sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+    ingress {
+        from_port = 5985
+        to_port = 5985
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        from_port = 5986
+        to_port = 5986
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
     egress {
         from_port = 0
         to_port = 0
