@@ -22,7 +22,7 @@ git clone https://github.com/junaidali/ansible-tower-terraform.git
 ```
 
 ## Update variables
-This project offers following configuration paramters
+This project offers following configuration paramters. 
 
 Configuration | Default Value | Notes
 --- | --- | ---
@@ -45,6 +45,14 @@ private_nodes_count | 1 | This is the count of private linux inventory hosts tha
 public_win_nodes_count | 1 | This is the count of public windows inventory hosts that should be created using the [Windows Server 2019 AMI](https://aws.amazon.com/windows/products/ec2/windows-server-2019/)
 node_instance_type | "t2.nano" | This is the instance type for the linux inventory hosts
 win_node_instance_type | "t2.micro" | This is the instance type for the windows inventory hosts
+
+### Managing local configurations
+If you like you can edit them directly within the terraform.tfvars file, but if you want to keep your configuration local and not add it to version control, create a local.tfvars file and update configuration as per your needs. The local.tfvars file is excluded from version control. To use local.tfvars file, add --var-file local.tfvars file to all terraform commands.
+
+e.g. To plan
+```
+terraform plan --var-file local.tfvars
+````
 
 ## Deploy infrastructure
 Change directory into the project
