@@ -43,6 +43,7 @@ aws_resource_owner_name | "OWNER-NAME" | This is the Owner tag set for all AWS r
 public_nodes_count | 1 | This is the count of public linux inventory hosts that should be created using the [Amazon Linux 2 AMI](https://aws.amazon.com/amazon-linux-2/)
 private_nodes_count | 1 | This is the count of private linux inventory hosts that should be created using the [Amazon Linux 2 AMI](https://aws.amazon.com/amazon-linux-2/)
 public_win_nodes_count | 1 | This is the count of public windows inventory hosts that should be created using the [Windows Server 2019 AMI](https://aws.amazon.com/windows/products/ec2/windows-server-2019/)
+private_win_nodes_count | 1 | This is the count of private windows inventory hosts that should be created using the [Windows Server 2019 AMI](https://aws.amazon.com/windows/products/ec2/windows-server-2019/)
 node_instance_type | "t2.nano" | This is the instance type for the linux inventory hosts
 win_node_instance_type | "t2.micro" | This is the instance type for the windows inventory hosts
 
