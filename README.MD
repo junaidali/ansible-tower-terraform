@@ -75,7 +75,15 @@ Apply infrastructure
 terraform apply
 ```
 
-Confirm to create infrastructure. Once the infrastructure is created it will output the public IP address of the tower server and the randomly generated adminsitrator password. Use this to connect to the tower using https://TOWER-IP-ADDRESS. The default administrator's username is "admin". Once you login, you will be asked for a valid license. Visit [Ansible Tower Licensing Site](https://www.ansible.com/license) for more details. If you have less than 10 inventory hosts you can go with "FREE Ansible TOWER TRIAL - LIMITED FEATURES UP TO 10 NODES" license.
+Confirm to create infrastructure. Once the infrastructure is created it will output the following information:
+
+* Private Inventory IP(s) - IP Addresses of the private linux inventory hosts
+* Public Inventory IP(s) - IP Addresses of the public linux inventory hosts
+* Public Windows Inventory IP(s) - IP Addresses of the public windows inventory hosts
+* Tower Admin Password - The password for default "admin" account within Tower
+* Tower Public IP(s) - The Public IP address of the Tower Server
+
+Use this to connect to the tower using https://<Tower Public IP>. The default administrator's username is "admin". Once you login, you will be asked for a valid license. Visit [Ansible Tower Licensing Site](https://www.ansible.com/license) for more details. If you have less than 10 inventory hosts you can go with "FREE Ansible TOWER TRIAL - LIMITED FEATURES UP TO 10 NODES" license.
 
 ## Destory Infrastructure
 With any cloud based service you will incure usage costs, so destory the environment once you are done.
