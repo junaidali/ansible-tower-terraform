@@ -6,14 +6,18 @@ output "Tower Public IP(s)" {
 output "Tower Admin Password" {
     value = "${module.compute.tower_admin_password}"
 }
-output "Private Inventory IP(s)" {
+output "Private Linux Inventory IP(s)" {
     value = "${join(", ", module.compute.private_inventory_ips)}"
 }
 
-output "Public Inventory IP(s)" {
+output "Public Linux Inventory IP(s)" {
     value = "${join(", ", module.compute.public_inventory_ips)}"
+}
+output "Private Windows Inventory IP(s)" {
+    value = "${join(", ", module.compute.win_private_inventory_ips)}"
 }
 
 output "Public Windows Inventory IP(s)" {
     value = "${join(", ", module.compute.win_public_inventory_ips)}"
 }
+

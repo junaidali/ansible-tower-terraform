@@ -17,3 +17,4 @@ variable "private_nodes_count" {}
 variable "public_win_nodes_count" {}
 variable "inventory_win_node_sg" {}
 variable "win_node_instance_type" {}
+variable "private_win_nodes_count" {}

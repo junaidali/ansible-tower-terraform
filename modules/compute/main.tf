@@ -120,7 +120,8 @@ resource "aws_instance" "inventory_nodes_public" {
     subnet_id = "${var.public_subnet}"
     tags = {
         Name = "${var.name_tag_prefix}-tower-inventory-node-public-${count.index + 1}",
-        Owner = "${var.aws_resource_owner_name}"
+        Owner = "${var.aws_resource_owner_name}",
+        OS = "Linux"
     }
 }
 
@@ -133,7 +134,8 @@ resource "aws_instance" "inventory_nodes_private" {
     subnet_id = "${var.private_subnet}"
     tags = {
         Name = "${var.name_tag_prefix}-tower-inventory-node-private-${count.index + 1}",
-        Owner = "${var.aws_resource_owner_name}"
+        Owner = "${var.aws_resource_owner_name}",
+        OS = "Linux"
     }
 }
 
@@ -146,6 +148,21 @@ resource "aws_instance" "win_inventory_nodes_public" {
     subnet_id = "${var.public_subnet}"
     tags = {
         Name = "${var.name_tag_prefix}-tower-inventory-win-node-public-${count.index + 1}",
-        Owner = "${var.aws_resource_owner_name}"
+        Owner = "${var.aws_resource_owner_name}",
+        OS = "Windows"
+    }
+}
+
+resource "aws_instance" "win_inventory_nodes_private" {
+    count = "${var.private_win_nodes_count}"
+    instance_type = "${var.win_node_instance_type}"
+    ami = "${data.aws_ami.inventory_win_node.id}"
+    key_name = "${aws_key_pair.ssh_auth.id}"
+    vpc_security_group_ids = ["${var.inventory_win_node_sg}"]
+    subnet_id = "${var.private_subnet}"
+    tags = {
+        Name = "${var.name_tag_prefix}-tower-inventory-win-node-private-${count.index + 1}",
+        Owner = "${var.aws_resource_owner_name}",
+        OS = "Windows"
     }
 }

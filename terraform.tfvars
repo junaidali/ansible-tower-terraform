@@ -15,5 +15,6 @@ aws_resource_owner_name = "OWNER-NAME"
 public_nodes_count = 1
 private_nodes_count = 1
 public_win_nodes_count = 1
+private_win_nodes_count = 1
 node_instance_type = "t2.nano"
 win_node_instance_type = "t2.micro"

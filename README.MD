@@ -77,9 +77,10 @@ terraform apply
 
 Confirm to create infrastructure. Once the infrastructure is created it will output the following information:
 
-* Private Inventory IP(s) - IP Addresses of the private linux inventory hosts
-* Public Inventory IP(s) - IP Addresses of the public linux inventory hosts
+* Private Linux Inventory IP(s) - IP Addresses of the private linux inventory hosts
+* Public Linux Inventory IP(s) - IP Addresses of the public linux inventory hosts
 * Public Windows Inventory IP(s) - IP Addresses of the public windows inventory hosts
+* Private Windows Inventory IP(s) - IP Addresses of the private windows inventory hosts
 * Tower Admin Password - The password for default "admin" account within Tower
 * Tower Public IP(s) - The Public IP address of the Tower Server
 

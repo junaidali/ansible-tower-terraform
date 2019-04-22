@@ -18,3 +18,7 @@ output "tower_admin_password" {
 output "win_public_inventory_ips" {
   value = "${aws_instance.win_inventory_nodes_public.*.public_ip}"
 }
+
+output "win_private_inventory_ips" {
+  value = "${aws_instance.win_inventory_nodes_private.*.private_ip}"
+}
