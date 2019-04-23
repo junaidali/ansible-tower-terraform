@@ -132,8 +132,12 @@ resource "aws_route_table" "private_rt" {
         Owner = "${var.aws_resource_owner_name}"
     }
 }
-*/
 
+resource "aws_route_table_association" "private_rt_assoc" {
+    subnet_id = "${aws_subnet.private_subnet.id}"
+    route_table_id = "${aws_route_table.private_rt.id}"
+}
+*/
 resource "aws_security_group" "tower" {
     name = "${var.name_tag_prefix}-tower_sg"
     description = "Allows Tower Communications"
