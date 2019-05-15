@@ -100,7 +100,7 @@ resource "aws_eip" "natgw_eip" {
 # nat gateway
 resource "aws_nat_gateway" "natgw" {
     allocation_id = "${aws_eip.natgw_eip.id}"
-    subnet_id = "${aws_subnet.private_subnet.id}"
+    subnet_id = "${aws_subnet.public_subnet.id}"
 
     depends_on = ["aws_internet_gateway.igw"]
     tags = {
