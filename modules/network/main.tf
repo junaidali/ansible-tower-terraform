@@ -78,18 +78,6 @@ resource "aws_route_table_association" "public_rt_assoc" {
     route_table_id = "${aws_route_table.public_rt.id}"
 }
 
-# private subnet
-resource "aws_subnet" "private_subnet" {
-    vpc_id = "${aws_vpc.vpc1.id}"
-    cidr_block = "${var.private_cidr}"
-    availability_zone = "${data.aws_availability_zones.available.names[0]}"
-
-    tags = {
-        Name = "${var.name_tag_prefix}-private-subnet",
-        Owner = "${var.aws_resource_owner_name}"
-    }
-}
-
 # elastic IP
 resource "aws_eip" "natgw_eip" {
     tags = {
@@ -97,6 +85,7 @@ resource "aws_eip" "natgw_eip" {
         Owner = "${var.aws_resource_owner_name}"
     }
 }
+
 # nat gateway
 resource "aws_nat_gateway" "natgw" {
     allocation_id = "${aws_eip.natgw_eip.id}"
@@ -108,6 +97,19 @@ resource "aws_nat_gateway" "natgw" {
         Owner = "${var.aws_resource_owner_name}"
     }
 }
+
+# private subnet
+resource "aws_subnet" "private_subnet" {
+    vpc_id = "${aws_vpc.vpc1.id}"
+    cidr_block = "${var.private_cidr}"
+    availability_zone = "${data.aws_availability_zones.available.names[0]}"
+    depends_on = ["aws_nat_gateway.natgw"]
+    tags = {
+        Name = "${var.name_tag_prefix}-private-subnet",
+        Owner = "${var.aws_resource_owner_name}"
+    }
+}
+
 # private route table
 resource "aws_route_table" "private_rt" {
     vpc_id = "${aws_vpc.vpc1.id}"
