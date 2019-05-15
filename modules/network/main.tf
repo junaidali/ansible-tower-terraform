@@ -78,14 +78,6 @@ resource "aws_route_table_association" "public_rt_assoc" {
     route_table_id = "${aws_route_table.public_rt.id}"
 }
 
-# default vpc route table
-resource "aws_default_route_table" "vpc_default_rt" {
-    default_route_table_id = "${aws_vpc.vpc1.default_route_table_id}"
-    tags = {
-        Name = "${var.name_tag_prefix}-default-rt",
-        Owner = "${var.aws_resource_owner_name}"
-    }
-}
 # private subnet
 resource "aws_subnet" "private_subnet" {
     vpc_id = "${aws_vpc.vpc1.id}"
@@ -97,7 +89,7 @@ resource "aws_subnet" "private_subnet" {
         Owner = "${var.aws_resource_owner_name}"
     }
 }
-/*
+
 # elastic IP
 resource "aws_eip" "natgw_eip" {
     tags = {
@@ -111,6 +103,10 @@ resource "aws_nat_gateway" "natgw" {
     subnet_id = "${aws_subnet.private_subnet.id}"
 
     depends_on = ["aws_internet_gateway.igw"]
+    tags = {
+        Name = "${var.name_tag_prefix}-nat-gw",
+        Owner = "${var.aws_resource_owner_name}"
+    }
 }
 # private route table
 resource "aws_route_table" "private_rt" {
@@ -121,14 +117,9 @@ resource "aws_route_table" "private_rt" {
         cidr_block = "0.0.0.0/0"
         gateway_id = "${aws_nat_gateway.natgw.id}"
     }
-    # default ipv6 route
-    route {
-        ipv6_cidr_block = "::/0"
-        gateway_id = "${aws_nat_gateway.natgw.id}"
-    }
 
     tags = {
-        Name = "${var.name_tag_prefix}-public-rt",
+        Name = "${var.name_tag_prefix}-private-rt",
         Owner = "${var.aws_resource_owner_name}"
     }
 }
@@ -137,7 +128,12 @@ resource "aws_route_table_association" "private_rt_assoc" {
     subnet_id = "${aws_subnet.private_subnet.id}"
     route_table_id = "${aws_route_table.private_rt.id}"
 }
-*/
+
+# default vpc route table
+resource "aws_main_route_table_association" "vpc_default_rt_assoc" {
+    vpc_id = "${aws_vpc.vpc1.id}"
+    route_table_id = "${aws_route_table.private_rt.id}"
+}
 resource "aws_security_group" "tower" {
     name = "${var.name_tag_prefix}-tower_sg"
     description = "Allows Tower Communications"
